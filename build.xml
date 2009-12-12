@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="FirstProject JavaEE 6" basedir="." default="deploy">
+	<property name="warfile" value="FirstProject" />
+	<target name="create">
+		<war destfile="${warfile}.war" webxml="WebContent/WEB-INF/web.xml" update="true">
+			<classes dir="build/classes" />
+			<fileset dir="WebContent">
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+		</war>
+	</target>
+	<target name="copy">
+		<copy todir="/Users/rodrigolazoti/Programs/glassfishv3/glassfish/domains/domain1/autodeploy" overwrite="true">
+			<fileset dir=".">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="deploy">
+		<antcall target="create" />
+		<antcall target="copy" />
+	</target>
+</project>
